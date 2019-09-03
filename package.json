@@ -10,7 +10,6 @@
     "eslint-fix": "eslint --fix \"src/**/*.js\"",
     "build": "webpack --mode production"
   },
-  "proxy": "https://graphiql.graphcms.com/simple/v1/swapi",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ignaciosy/Papinotas-Entry-Test.git"
