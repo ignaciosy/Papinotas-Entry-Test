@@ -6,12 +6,23 @@ import CharacterDetails from "./CharacterDetails";
 const allCharactersQuery = gql`
   {
     allPersons(orderBy: name_ASC) {
-      id
       name
-      height
+      homeworld {
+        name
+      }
+      species {
+        name
+      }
+      vehicles {
+        name
+      }
+      films {
+        title
+      }
     }
   }
 `;
+console.log(allCharactersQuery);
 
 export default function Characters() {
   const { data, loading, error } = useQuery(allCharactersQuery);
@@ -20,9 +31,9 @@ export default function Characters() {
 
   return (
     <div>
-      {data.allPersons.map(({ id, name, height }) => (
+      {data.allPersons.map(person => (
         //<li key={id}>{`${name}`}</li>
-        <CharacterDetails id={id} name={name} height={height} />
+        <CharacterDetails character={person} />
       ))}
     </div>
   );

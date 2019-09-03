@@ -17,20 +17,40 @@ class CharacterDetails extends React.Component {
   render() {
     if (this.state.detailedView) {
       return (
-        <a href="#" onClick={this.handleClick}>
-          <div key={this.props.id}>
-            <h2>{this.props.name}</h2>
-            <h3>height: {this.props.height}</h3>
-          </div>
-        </a>
+        <div key={this.props.character.id}>
+          <a href="#" onClick={this.handleClick}>
+            <h2>{this.props.character.name}</h2>
+          </a>
+          <p>
+            <b>Homeworld:</b> {this.props.character.homeworld.name}
+          </p>
+          {this.props.character.species.map(specie => (
+            <p>
+              <b>Species: </b>
+              {specie.name}
+            </p>
+          ))}
+          <b>Vehicles:</b>
+          <ul>
+            {this.props.character.vehicles.map(vehicle => (
+              <li>{vehicle.name}</li>
+            ))}
+          </ul>
+          <b>Films:</b>
+          <ul>
+            {this.props.character.films.map(film => (
+              <li>{film.title}</li>
+            ))}
+          </ul>
+        </div>
       );
     } else {
       return (
-        <a href="#" onClick={this.handleClick}>
-          <div key={this.props.id}>
-            <h2>{this.props.name}</h2>
-          </div>
-        </a>
+        <div key={this.props.character.id}>
+          <a href="#" onClick={this.handleClick}>
+            <h2>{this.props.character.name}</h2>
+          </a>
+        </div>
       );
     }
   }
