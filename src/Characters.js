@@ -8,6 +8,7 @@ const allCharactersQuery = gql`
     allPersons(orderBy: name_ASC) {
       id
       name
+      height
     }
   }
 `;
@@ -21,7 +22,7 @@ export default function Characters() {
     <div>
       {data.allPersons.map(({ id, name, height }) => (
         //<li key={id}>{`${name}`}</li>
-        <CharacterDetails id={id} name={name} />
+        <CharacterDetails id={id} name={name} height={height} />
       ))}
     </div>
   );
