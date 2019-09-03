@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 module.exports = {
   mode: "development",
   devtool: "inline-source-map",
-  entry: path.join(__dirname, "src", "index.js"),
+  entry: ["@babel/polyfill", path.join(__dirname, "src", "index.js")],
   output: {
     path: path.join(__dirname, "build"),
     publicPath: "/",
@@ -16,7 +16,7 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: ["babel-loader", "eslint-loader"]
+        use: ["babel-loader"] //, "eslint-loader"]
       },
       {
         test: /\.css$/,
@@ -38,7 +38,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "index.html")
+      template: path.join(__dirname, "public", "index.html")
     })
   ]
 };
