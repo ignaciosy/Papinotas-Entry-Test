@@ -1,6 +1,7 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
+import CharacterDetails from "./CharacterDetails";
 
 const allCharactersQuery = gql`
   {
@@ -17,10 +18,11 @@ export default function Characters() {
   if (error) return <p>Error :(</p>;
 
   return (
-    <ul>
-      {data.allPersons.map(({ id, name }) => (
-        <li key={id}>{`${name}`}</li>
+    <div>
+      {data.allPersons.map(({ id, name, height }) => (
+        //<li key={id}>{`${name}`}</li>
+        <CharacterDetails id={id} name={name} />
       ))}
-    </ul>
+    </div>
   );
 }

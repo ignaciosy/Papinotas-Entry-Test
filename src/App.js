@@ -12,7 +12,7 @@ class App extends React.Component {
     return (
       <ApolloProvider client={client}>
         <div>
-          <h2>My first Apollo app</h2>
+          <h2>List of Star Wars characters</h2>
         </div>
         <Characters />
       </ApolloProvider>
