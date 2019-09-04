@@ -19,9 +19,10 @@ const client = new ApolloClient({
 
 class App extends React.Component {
   render() {
+    const classes = this.props.classes;
     return (
       <ApolloProvider client={client}>
-        <div className={this.props.classes.container}>
+        <div className={classes.container}>
           <h1>List of Star Wars characters</h1>
         </div>
         <Characters />

@@ -39,7 +39,7 @@ class List extends React.Component {
   }
 
   render() {
-    let classes = this.props.classes;
+    const classes = this.props.classes;
     const filteredCharacters = this.getFilteredCharacters();
     return (
       <div className={classes.root}>

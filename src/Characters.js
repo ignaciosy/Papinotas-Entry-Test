@@ -15,18 +15,6 @@ const allCharactersQuery = gql`
   {
     allPersons(orderBy: name_ASC) {
       name
-      homeworld {
-        name
-      }
-      species {
-        name
-      }
-      vehicles {
-        name
-      }
-      films {
-        title
-      }
     }
   }
 `;
