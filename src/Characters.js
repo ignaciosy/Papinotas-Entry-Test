@@ -15,18 +15,6 @@ const allCharactersQuery = gql`
   {
     allPersons(orderBy: name_ASC) {
       name
-      homeworld {
-        name
-      }
-      species {
-        name
-      }
-      vehicles {
-        name
-      }
-      films {
-        title
-      }
     }
   }
 `;
@@ -49,9 +37,5 @@ export default function Characters() {
       </div>
     );
 
-  return (
-    <div>
-      <FilterableCharactersList characters={data.allPersons} />
-    </div>
-  );
+  return <FilterableCharactersList characters={data.allPersons} />;
 }

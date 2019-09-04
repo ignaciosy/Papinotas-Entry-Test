@@ -1,9 +1,9 @@
 import React from "react";
-import List from "./List";
+import CharactersList from "./CharactersList";
+import FavouritesList from "./FavouritesList";
 import Search from "./Search";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
-import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 
 const styles = {
@@ -56,8 +56,9 @@ class FilterableCharactersList extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
-      <div className={this.props.classes.root}>
+      <div className={classes.root}>
         <Grid container spacing={3}>
           <Grid item xs={6}>
             <Search
@@ -66,10 +67,7 @@ class FilterableCharactersList extends React.Component {
             />
           </Grid>
           <Grid item xs={6}>
-            <div className={this.props.classes.container}>
-              <h2>My Favourites</h2>
-            </div>
-            <List
+            <FavouritesList
               characters={this.getFavouriteCharacters()}
               filterText=""
               favouriteCharacters={this.state.favouriteCharacters}
@@ -77,7 +75,7 @@ class FilterableCharactersList extends React.Component {
             />
           </Grid>
           <Grid item xs={12}>
-            <List
+            <CharactersList
               characters={this.props.characters}
               filterText={this.state.filterText}
               favouriteCharacters={this.state.favouriteCharacters}

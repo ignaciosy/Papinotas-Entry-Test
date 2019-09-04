@@ -25,13 +25,14 @@ class Search extends React.Component {
   }
 
   render() {
+    const classes = this.props.classes;
     return (
-      <form className={this.props.classes.container}>
+      <form className={classes.container}>
         <TextField
           id="outlined-name"
           label="Search"
           autoFocus
-          className={this.props.classes.textField}
+          className={classes.textField}
           value={this.props.filterText}
           onChange={this.handleFilterTextChange}
           margin="normal"
