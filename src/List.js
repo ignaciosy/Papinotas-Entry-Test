@@ -1,5 +1,15 @@
 import React from "react";
 import CharacterDetails from "./CharacterDetails";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+
+const styles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  }
+};
 
 class List extends React.Component {
   constructor(props) {
@@ -8,9 +18,6 @@ class List extends React.Component {
     this.handleFavouriteButtonClick = this.handleFavouriteButtonClick.bind(
       this
     );
-    this.state = {
-      favouriteCharacters: []
-    };
   }
 
   getFilteredCharacters() {
@@ -28,28 +35,19 @@ class List extends React.Component {
   }
 
   handleFavouriteButtonClick(name) {
-    let currentFavourites = this.state.favouriteCharacters;
-    if (currentFavourites.includes(name)) {
-      currentFavourites.ind;
-      currentFavourites = currentFavourites.filter(fav => fav != name);
-    } else {
-      currentFavourites.push(name);
-    }
-    this.setState({
-      favouriteCharacters: currentFavourites
-    });
+    this.props.onFavouriteButtonClick(name);
   }
 
   render() {
+    let classes = this.props.classes;
     const filteredCharacters = this.getFilteredCharacters();
     return (
-      <div>
-        <p>{this.state.favouriteCharacters.join(" - ")}</p>
+      <div className={classes.root}>
         {filteredCharacters.map(character => (
           <CharacterDetails
             key={character.name}
             character={character}
-            isFavourite={this.state.favouriteCharacters.includes(
+            isFavourite={this.props.favouriteCharacters.includes(
               character.name
             )}
             onFavouriteButtonClick={this.handleFavouriteButtonClick}
@@ -60,4 +58,8 @@ class List extends React.Component {
   }
 }
 
-export default List;
+List.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(List);

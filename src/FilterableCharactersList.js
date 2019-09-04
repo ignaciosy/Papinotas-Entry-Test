@@ -1,14 +1,34 @@
 import React from "react";
 import List from "./List";
 import Search from "./Search";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import Paper from "@material-ui/core/Paper";
+import Grid from "@material-ui/core/Grid";
+
+const styles = {
+  root: {
+    flexGrow: 1
+  },
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  }
+};
 
 class FilterableCharactersList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      filterText: ""
+      filterText: "",
+      favouriteCharacters: []
     };
     this.handleFilterTextChange = this.handleFilterTextChange.bind(this);
+    this.handleFavouriteButtonClick = this.handleFavouriteButtonClick.bind(
+      this
+    );
+    this.getFavouriteCharacters = this.getFavouriteCharacters.bind(this);
   }
 
   handleFilterTextChange(filterText) {
@@ -17,20 +37,61 @@ class FilterableCharactersList extends React.Component {
     });
   }
 
+  handleFavouriteButtonClick(name) {
+    let currentFavourites = this.state.favouriteCharacters;
+    if (currentFavourites.includes(name)) {
+      currentFavourites = currentFavourites.filter(fav => fav != name);
+    } else {
+      currentFavourites.push(name);
+    }
+    this.setState({
+      favouriteCharacters: currentFavourites
+    });
+  }
+
+  getFavouriteCharacters() {
+    return this.props.characters.filter(character =>
+      this.state.favouriteCharacters.includes(character.name)
+    );
+  }
+
   render() {
     return (
-      <div>
-        <Search
-          filterText={this.state.filterText}
-          onFilterTextChange={this.handleFilterTextChange}
-        />
-        <List
-          characters={this.props.characters}
-          filterText={this.state.filterText}
-        />
+      <div className={this.props.classes.root}>
+        <Grid container spacing={3}>
+          <Grid item xs={6}>
+            <Search
+              filterText={this.state.filterText}
+              onFilterTextChange={this.handleFilterTextChange}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <div className={this.props.classes.container}>
+              <h2>My Favourites</h2>
+            </div>
+            <List
+              characters={this.getFavouriteCharacters()}
+              filterText=""
+              favouriteCharacters={this.state.favouriteCharacters}
+              onFavouriteButtonClick={this.handleFavouriteButtonClick}
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <List
+              characters={this.props.characters}
+              filterText={this.state.filterText}
+              favouriteCharacters={this.state.favouriteCharacters}
+              onFavouriteButtonClick={this.handleFavouriteButtonClick}
+            />
+          </Grid>
+        </Grid>
       </div>
     );
   }
 }
 
-export default FilterableCharactersList;
+FilterableCharactersList.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(FilterableCharactersList);
