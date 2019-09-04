@@ -2,7 +2,7 @@ import React from "react";
 import SimpleCharacter from "./SimpleCharacter";
 import DetailedCharacter from "./DetailedCharacter";
 
-class CharacterDetails extends React.Component {
+class CharacterCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,4 +47,4 @@ class CharacterDetails extends React.Component {
   }
 }
 
-export default CharacterDetails;
+export default CharacterCard;

@@ -1,5 +1,6 @@
 import React from "react";
-import List from "./List";
+import CharactersList from "./CharactersList";
+import FavouritesList from "./FavouritesList";
 import Search from "./Search";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
@@ -66,10 +67,7 @@ class FilterableCharactersList extends React.Component {
             />
           </Grid>
           <Grid item xs={6}>
-            <div className={classes.container}>
-              <h2>My Favourites</h2>
-            </div>
-            <List
+            <FavouritesList
               characters={this.getFavouriteCharacters()}
               filterText=""
               favouriteCharacters={this.state.favouriteCharacters}
@@ -77,7 +75,7 @@ class FilterableCharactersList extends React.Component {
             />
           </Grid>
           <Grid item xs={12}>
-            <List
+            <CharactersList
               characters={this.props.characters}
               filterText={this.state.filterText}
               favouriteCharacters={this.state.favouriteCharacters}

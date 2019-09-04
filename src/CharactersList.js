@@ -1,5 +1,5 @@
 import React from "react";
-import CharacterDetails from "./CharacterDetails";
+import CharacterCard from "./CharacterCard";
 import { withStyles } from "@material-ui/core/styles";
 import PropTypes from "prop-types";
 
@@ -11,7 +11,7 @@ const styles = {
   }
 };
 
-class List extends React.Component {
+class CharactersList extends React.Component {
   constructor(props) {
     super(props);
     this.getFilteredCharacters = this.getFilteredCharacters.bind(this);
@@ -44,7 +44,7 @@ class List extends React.Component {
     return (
       <div className={classes.root}>
         {filteredCharacters.map(character => (
-          <CharacterDetails
+          <CharacterCard
             key={character.name}
             character={character}
             isFavourite={this.props.favouriteCharacters.includes(
@@ -58,8 +58,8 @@ class List extends React.Component {
   }
 }
 
-List.propTypes = {
+CharactersList.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
-export default withStyles(styles)(List);
+export default withStyles(styles)(CharactersList);

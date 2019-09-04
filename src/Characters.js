@@ -37,9 +37,5 @@ export default function Characters() {
       </div>
     );
 
-  return (
-    <div>
-      <FilterableCharactersList characters={data.allPersons} />
-    </div>
-  );
+  return <FilterableCharactersList characters={data.allPersons} />;
 }
