@@ -17,7 +17,7 @@ class CharacterDetails extends React.Component {
   render() {
     if (this.state.detailedView) {
       return (
-        <div key={this.props.character.id}>
+        <div>
           <a href="#" onClick={this.handleClick}>
             <h2>{this.props.character.name}</h2>
           </a>
@@ -46,7 +46,7 @@ class CharacterDetails extends React.Component {
       );
     } else {
       return (
-        <div key={this.props.character.id}>
+        <div>
           <a href="#" onClick={this.handleClick}>
             <h2>{this.props.character.name}</h2>
           </a>
