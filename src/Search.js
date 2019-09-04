@@ -1,4 +1,18 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import TextField from "@material-ui/core/TextField";
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  },
+  textField: {
+    margin: "1rem"
+  }
+};
 
 class Search extends React.Component {
   constructor(props) {
@@ -12,16 +26,24 @@ class Search extends React.Component {
 
   render() {
     return (
-      <form>
-        <input
-          type="text"
+      <form className={this.props.classes.container}>
+        <TextField
+          id="outlined-name"
+          label="Search"
           autoFocus
-          placeholder="search characters..."
+          className={this.props.classes.textField}
           value={this.props.filterText}
           onChange={this.handleFilterTextChange}
-        ></input>
+          margin="normal"
+          variant="outlined"
+        />
       </form>
     );
   }
 }
-export default Search;
+
+Search.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(Search);

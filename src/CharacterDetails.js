@@ -64,21 +64,25 @@ class CharacterDetails extends React.Component {
               <b>Homeworld:</b> {this.props.character.homeworld.name}
             </p>
             {this.props.character.species.map(specie => (
-              <p>
+              <p key={specie.name}>
                 <b>Species: </b>
-                {specie.name}
+                {this.props.character.name + specie.name}
               </p>
             ))}
             <b>Vehicles:</b>
             <ul>
               {this.props.character.vehicles.map(vehicle => (
-                <li>{vehicle.name}</li>
+                <li key={this.props.character.name + vehicle.name}>
+                  {vehicle.name}
+                </li>
               ))}
             </ul>
             <b>Films:</b>
             <ul>
               {this.props.character.films.map(film => (
-                <li>{film.title}</li>
+                <li key={this.props.character.name + film.title}>
+                  {film.title}
+                </li>
               ))}
             </ul>
           </CardActionArea>
