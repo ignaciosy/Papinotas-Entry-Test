@@ -4,45 +4,45 @@ import CharacterDetails from "./CharacterDetails";
 class List extends React.Component {
   constructor(props) {
     super(props);
+    this.getFilteredCharacters = this.getFilteredCharacters.bind(this);
+    this.handleCharacterClick = this.handleCharacterClick.bind(this);
     this.state = {
-      filteredCharacters: this.props.characters
+      isDetailedView: false
     };
-    this.searchCharacters = this.searchCharacters.bind(this);
   }
 
-  componentDidMount() {}
-
-  searchCharacters(e) {
-    let newFilter = null;
-    if (e.target.value !== "") {
-      newFilter = this.props.characters.filter(character =>
-        character.name.toLowerCase().includes(e.target.value.toLowerCase())
+  getFilteredCharacters() {
+    let filteredCharacters = null;
+    if (this.props.filterText !== "") {
+      filteredCharacters = this.props.characters.filter(character =>
+        character.name
+          .toLowerCase()
+          .includes(this.props.filterText.toLowerCase())
       );
     } else {
-      newFilter = this.props.characters;
+      filteredCharacters = this.props.characters;
     }
-    this.setState(() => ({
-      filteredCharacters: newFilter
-    }));
+    return filteredCharacters;
+  }
+
+  handleCharacterClick(name) {
+    this.setState({
+      isDetailedView: !this.state.isDetailedView
+    });
   }
 
   render() {
+    const filteredCharacters = this.getFilteredCharacters();
     return (
       <div>
-        <div>
-          <input
-            type="text"
-            autoFocus
-            onChange={this.searchCharacters}
-            placeholder="search characters..."
-          ></input>
-        </div>
-        <div>
-          {this.state.filteredCharacters.map(person => (
-            //<li key={id}>{`${name}`}</li>
-            <CharacterDetails key={person.name} character={person} />
-          ))}
-        </div>
+        {filteredCharacters.map(character => (
+          <CharacterDetails
+            key={character.name}
+            character={character}
+            isDetailedView={this.state.isDetailedView}
+            onCharacterClick={this.handleCharacterClick}
+          />
+        ))}
       </div>
     );
   }

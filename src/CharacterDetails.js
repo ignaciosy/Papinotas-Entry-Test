@@ -4,21 +4,22 @@ class CharacterDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      detailedView: false
+      isDetailedView: false
     };
+    this.handleCharacterClick = this.handleCharacterClick.bind(this);
   }
 
-  handleClick = e => {
+  handleCharacterClick() {
     this.setState({
-      detailedView: !this.state.detailedView
+      isDetailedView: !this.state.isDetailedView
     });
-  };
+  }
 
   render() {
-    if (this.state.detailedView) {
+    if (this.state.isDetailedView) {
       return (
         <div>
-          <a href="#" onClick={this.handleClick}>
+          <a href="#" onClick={this.handleCharacterClick}>
             <h2>{this.props.character.name}</h2>
           </a>
           <p>
@@ -47,7 +48,7 @@ class CharacterDetails extends React.Component {
     } else {
       return (
         <div>
-          <a href="#" onClick={this.handleClick}>
+          <a href="#" onClick={this.handleCharacterClick}>
             <h2>{this.props.character.name}</h2>
           </a>
         </div>

@@ -1,7 +1,8 @@
 import React from "react";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
-import List from "./List";
+
+import FilterableCharactersList from "./FilterableCharactersList";
 
 const allCharactersQuery = gql`
   {
@@ -30,7 +31,7 @@ export default function Characters() {
 
   return (
     <div>
-      <List characters={data.allPersons} />
+      <FilterableCharactersList characters={data.allPersons} />
     </div>
   );
 }
