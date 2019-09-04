@@ -10,6 +10,7 @@ import Homeworld from "./Homeworld";
 import Specie from "./Specie";
 import Vehicle from "./Vehicle";
 import Film from "./Film";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 const styles = {
   root: {
@@ -22,6 +23,9 @@ const styles = {
   },
   card: {
     backgroundColor: "#7AEFFF",
+    margin: ".2rem"
+  },
+  progress: {
     margin: ".2rem"
   }
 };
@@ -70,8 +74,17 @@ class DetailedCharacter extends React.Component {
           variables={{ name: this.props.character.name }}
         >
           {({ loading, error, data }) => {
-            if (loading) return <p>Good things take time....</p>;
-            if (error) return <p>Something went wrong...</p>;
+            if (loading)
+              return <CircularProgress className={classes.progress} />;
+            if (error)
+              return (
+                <SimpleCharacter
+                  character={this.props.character}
+                  onCharacterClick={this.handleCharacterClick}
+                  onFavouriteButtonClick={this.handleFavouriteButtonClick}
+                  isFavourite={this.props.isFavourite}
+                />
+              );
 
             return (
               <Card className={classes.card}>
