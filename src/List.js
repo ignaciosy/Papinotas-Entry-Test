@@ -5,9 +5,11 @@ class List extends React.Component {
   constructor(props) {
     super(props);
     this.getFilteredCharacters = this.getFilteredCharacters.bind(this);
-    this.handleCharacterClick = this.handleCharacterClick.bind(this);
+    this.handleFavouriteButtonClick = this.handleFavouriteButtonClick.bind(
+      this
+    );
     this.state = {
-      isDetailedView: false
+      favouriteCharacters: []
     };
   }
 
@@ -25,9 +27,16 @@ class List extends React.Component {
     return filteredCharacters;
   }
 
-  handleCharacterClick(name) {
+  handleFavouriteButtonClick(name) {
+    let currentFavourites = this.state.favouriteCharacters;
+    if (currentFavourites.includes(name)) {
+      currentFavourites.ind;
+      currentFavourites = currentFavourites.filter(fav => fav != name);
+    } else {
+      currentFavourites.push(name);
+    }
     this.setState({
-      isDetailedView: !this.state.isDetailedView
+      favouriteCharacters: currentFavourites
     });
   }
 
@@ -35,12 +44,15 @@ class List extends React.Component {
     const filteredCharacters = this.getFilteredCharacters();
     return (
       <div>
+        <p>{this.state.favouriteCharacters.join(" - ")}</p>
         {filteredCharacters.map(character => (
           <CharacterDetails
             key={character.name}
             character={character}
-            isDetailedView={this.state.isDetailedView}
-            onCharacterClick={this.handleCharacterClick}
+            isFavourite={this.state.favouriteCharacters.includes(
+              character.name
+            )}
+            onFavouriteButtonClick={this.handleFavouriteButtonClick}
           />
         ))}
       </div>

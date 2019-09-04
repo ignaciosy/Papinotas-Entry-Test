@@ -7,12 +7,19 @@ class CharacterDetails extends React.Component {
       isDetailedView: false
     };
     this.handleCharacterClick = this.handleCharacterClick.bind(this);
+    this.handleFavouriteButtonClick = this.handleFavouriteButtonClick.bind(
+      this
+    );
   }
 
   handleCharacterClick() {
     this.setState({
       isDetailedView: !this.state.isDetailedView
     });
+  }
+
+  handleFavouriteButtonClick() {
+    this.props.onFavouriteButtonClick(this.props.character.name);
   }
 
   render() {
@@ -43,6 +50,17 @@ class CharacterDetails extends React.Component {
               <li>{film.title}</li>
             ))}
           </ul>
+          <button
+            type="button"
+            style={
+              this.props.isFavourite
+                ? { background: "yellow" }
+                : { background: "green" }
+            }
+            onClick={this.handleFavouriteButtonClick}
+          >
+            Fav
+          </button>
         </div>
       );
     } else {
@@ -51,6 +69,17 @@ class CharacterDetails extends React.Component {
           <a href="#" onClick={this.handleCharacterClick}>
             <h2>{this.props.character.name}</h2>
           </a>
+          <button
+            type="button"
+            style={
+              this.props.isFavourite
+                ? { background: "yellow" }
+                : { background: "green" }
+            }
+            onClick={this.handleFavouriteButtonClick}
+          >
+            Fav
+          </button>
         </div>
       );
     }
