@@ -5,7 +5,7 @@ Hope you like it :)
 
 ## Instructions
 
-The app has been deployed for free with netlify in [`this`](https://vigorous-nightingale-2ac3e0.netlify.com/) address.
+The app has been deployed for free with netlify in [`this address`](https://vigorous-nightingale-2ac3e0.netlify.com/).
 
 You can also run the project yourself by following this steps:
 
