@@ -1,4 +1,21 @@
 import React from "react";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+import Avatar from "@material-ui/core/Avatar";
+import Chip from "@material-ui/core/Chip";
+import FaceIcon from "@material-ui/icons/Face";
+import DoneIcon from "@material-ui/icons/Done";
+
+const styles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  },
+  chip: {
+    //margin: theme.spacing(1)
+  }
+};
 
 class CharacterDetails extends React.Component {
   constructor(props) {
@@ -23,6 +40,7 @@ class CharacterDetails extends React.Component {
   }
 
   render() {
+    let classes = this.props.classes;
     if (this.state.isDetailedView) {
       return (
         <div>
@@ -65,25 +83,25 @@ class CharacterDetails extends React.Component {
       );
     } else {
       return (
-        <div>
-          <a href="#" onClick={this.handleCharacterClick}>
-            <h2>{this.props.character.name}</h2>
-          </a>
-          <button
-            type="button"
-            style={
-              this.props.isFavourite
-                ? { background: "yellow" }
-                : { background: "green" }
-            }
-            onClick={this.handleFavouriteButtonClick}
-          >
-            Fav
-          </button>
+        <div className={classes.root}>
+          <Chip
+            icon={<FaceIcon />}
+            label={this.props.character.name}
+            className={classes.chip}
+            onClick={this.handleCharacterClick}
+            onDelete={this.handleFavouriteButtonClick}
+            color={this.props.isFavourite ? "secondary" : "primary"}
+            deleteIcon={<DoneIcon />}
+            variant="outlined"
+          />
         </div>
       );
     }
   }
 }
 
-export default CharacterDetails;
+CharacterDetails.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(CharacterDetails);

@@ -1,5 +1,15 @@
 import React from "react";
 import CharacterDetails from "./CharacterDetails";
+import { withStyles } from "@material-ui/core/styles";
+import PropTypes from "prop-types";
+
+const styles = {
+  root: {
+    display: "flex",
+    justifyContent: "center",
+    flexWrap: "wrap"
+  }
+};
 
 class List extends React.Component {
   constructor(props) {
@@ -41,9 +51,10 @@ class List extends React.Component {
   }
 
   render() {
+    let classes = this.props.classes;
     const filteredCharacters = this.getFilteredCharacters();
     return (
-      <div>
+      <div className={classes.root}>
         <p>{this.state.favouriteCharacters.join(" - ")}</p>
         {filteredCharacters.map(character => (
           <CharacterDetails
@@ -60,4 +71,8 @@ class List extends React.Component {
   }
 }
 
-export default List;
+List.propTypes = {
+  classes: PropTypes.object.isRequired
+};
+
+export default withStyles(styles)(List);
